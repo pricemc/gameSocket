@@ -35,7 +35,6 @@ var connected = function(socket){
     connectCounter++;
     socket.userid = UUID();
 
-    //tell the player they connected, giving them their id
     socket.emit('onconnected', {
         id: socket.userid
     });
@@ -45,14 +44,11 @@ var connected = function(socket){
 //        msg: 'hello'
 //    });
 
-    //Useful to know when someone connects
     console.log('\t socket.io:: player ' + socket.userid + ' connected');
 
-    //When this client disconnects
     socket.on('disconnect', function () {
 
-        //Useful to know when someone disconnects
         console.log('\t socket.io:: client disconnected ' + socket.userid);
-
-    }); //client.on disconnect
+        connectCounter--;
+    });
 };
